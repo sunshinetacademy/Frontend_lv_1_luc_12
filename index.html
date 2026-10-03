@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحاضرة الثانية عشرة | Advanced CSS & Effects | Sunshine T Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #4A7C59;
+            --primary-dark: #2D5F3F;
+            --primary-light: #7BA889;
+            --primary-soft: #D4E5D8;
+            --secondary: #D4A574;
+            --secondary-dark: #B8895A;
+            --secondary-light: #E8C9A0;
+            --bg-main: #FAF7F2;
+            --bg-cream: #F5EFE6;
+            --bg-card: #FFFFFF;
+            --bg-soft: #EDE5D8;
+            --bg-code: #F9F6F0;
+            --text-dark: #2C1810;
+            --text-body: #4A3728;
+            --text-muted: #6B5744;
+            --text-light: #8B7356;
+            --border: #E5DCC8;
+            --border-soft: #EDE5D8;
+            --success: #5B8C5A;
+            --success-bg: #E3EDDF;
+            --info: #5B8BA0;
+            --info-bg: #DEE8EC;
+            --warning: #C89B6C;
+            --warning-bg: #F0E4D4;
+            --danger: #B85C5C;
+            --danger-bg: #F0DCDC;
+            --purple: #8B7BA8;
+            --purple-bg: #E5DFED;
+            --adv-color: #7C3AED;
+            --adv-dark: #5B21B6;
+            --adv-light: #EDE9FE;
+            --adv-soft: #DDD6FE;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-body);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        header {
+            background: linear-gradient(135deg, #FAF7F2 0%, #EDE5D8 100%);
+            border-bottom: 3px solid var(--primary);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(74, 124, 89, 0.08);
+        }
+
+        .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.4rem; font-weight: 800; color: var(--primary-dark); }
+
+        .logo-icon {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 900; font-size: 1.3rem;
+            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.25);
+        }
+
+        .lecture-badge {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            color: var(--primary-dark);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .hero {
+            padding: 70px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--adv-light) 0%, #D4E5D8 50%, #E8C9A0 100%);
+            border: 2px solid var(--adv-color);
+            border-radius: 24px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.12);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--adv-dark);
+            color: white;
+            padding: 8px 22px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 18px;
+            color: var(--text-dark);
+            line-height: 1.3;
+            position: relative;
+        }
+
+        .hero h1 span { color: var(--adv-dark); }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-body);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        section { margin: 60px 0; }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--border);
+        }
+
+        .section-title .title-icon {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, var(--adv-color) 0%, var(--primary) 100%);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            color: white;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(74, 124, 89, 0.04);
+        }
+
+        .card:hover {
+            border-color: var(--adv-color);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p { color: var(--text-body); margin-bottom: 12px; }
+        .card strong { color: var(--text-dark); }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .objective-item {
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-right: 5px solid var(--adv-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .objective-item:hover {
+            border-color: var(--adv-color);
+            border-right-color: var(--secondary);
+            background: var(--bg-cream);
+        }
+
+        .objective-number {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--adv-color) 0%, var(--primary) 100%);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 800;
+            flex-shrink: 0;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+        }
+
+        .objective-item h4 { color: var(--text-dark); font-size: 1.05rem; margin-bottom: 5px; }
+        .objective-item p { color: var(--text-muted); font-size: 0.9rem; }
+
+        .review-box {
+            background: linear-gradient(135deg, var(--purple-bg) 0%, #F5F3FF 100%);
+            border: 2px solid var(--purple);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 30px 0;
+        }
+
+        .review-box h3 {
+            color: var(--purple);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .review-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .review-list li {
+            background: var(--bg-card);
+            border: 1px solid #D4C9E8;
+            border-radius: 10px;
+            padding: 12px 16px;
+            padding-right: 40px;
+            position: relative;
+            color: var(--text-body);
+        }
+
+        .review-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--purple);
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+
+        .analogy-box {
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-soft) 100%);
+            border: 2px dashed var(--secondary);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 30px 0;
+        }
+
+        .analogy-box h3 { color: var(--secondary-dark); margin-bottom: 15px; font-size: 1.3rem; }
+
+        .analogy-list { list-style: none; }
+
+        .analogy-list li {
+            padding: 12px 0;
+            padding-right: 40px;
+            position: relative;
+            color: var(--text-body);
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .analogy-list li:last-child { border-bottom: none; }
+
+        .analogy-list li::before {
+            content: '💡';
+            position: absolute;
+            right: 0;
+            top: 12px;
+            font-size: 1.2rem;
+        }
+
+        .analogy-list li strong { color: var(--primary-dark); }
+
+        .code-wrapper {
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            background: var(--bg-code);
+            box-shadow: 0 4px 12px rgba(74, 124, 89, 0.06);
+        }
+
+        .code-header {
+            background: linear-gradient(90deg, var(--adv-color) 0%, var(--primary) 100%);
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-lang {
+            background: var(--text-dark);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .code-dots { display: flex; gap: 6px; }
+
+        .code-dots span {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .code-dots span:nth-child(1) { background: #E8A5A5; }
+        .code-dots span:nth-child(2) { background: #E8D4A0; }
+        .code-dots span:nth-child(3) { background: #A5D4B0; }
+
+        pre {
+            padding: 20px;
+            overflow-x: auto;
+            margin: 0;
+            background: var(--bg-code);
+        }
+
+        pre code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            display: block;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .selector { color: #8B2252; font-weight: 700; }
+        .property { color: #0550AE; }
+        .css-value { color: #116329; }
+        .css-number { color: #0550AE; }
+        .css-unit { color: #953800; }
+        .css-color-val { color: #6639BA; }
+        .punctuation { color: #6B5744; }
+        .comment { color: #8B7356; font-style: italic; }
+        .adv-prop { color: #7C3AED; font-weight: 700; }
+        .var-name { color: #0550AE; font-weight: 700; }
+
+        .info-box {
+            background: var(--info-bg);
+            border: 2px solid #B8D4DE;
+            border-right-width: 5px;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 { color: #2E6B8A; margin-bottom: 8px; font-size: 1.05rem; }
+        .info-box p { color: #1F4A5E; font-size: 0.95rem; }
+
+        .warning-box {
+            background: var(--warning-bg);
+            border: 2px solid #E5D4B8;
+            border-right-width: 5px;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .warning-box h4 { color: var(--secondary-dark); margin-bottom: 8px; }
+        .warning-box p { color: var(--text-body); font-size: 0.95rem; }
+
+        .success-box {
+            background: var(--success-bg);
+            border: 2px solid #B8D4B5;
+            border-right-width: 5px;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .success-box h4 { color: var(--primary-dark); margin-bottom: 8px; }
+        .success-box p { color: #2D5F3F; font-size: 0.95rem; }
+
+        .danger-box {
+            background: var(--danger-bg);
+            border: 2px solid #E0B8B8;
+            border-right-width: 5px;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .danger-box h4 { color: #8B3A3A; margin-bottom: 8px; }
+        .danger-box p { color: #5C2828; font-size: 0.95rem; }
+
+        .element-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .element-table thead { background: linear-gradient(90deg, var(--adv-color) 0%, var(--primary) 100%); color: white; }
+        .element-table th { padding: 14px 18px; text-align: right; font-weight: 700; font-size: 1rem; }
+        .element-table td { padding: 14px 18px; border-bottom: 1px solid var(--border-soft); color: var(--text-body); }
+        .element-table tr:last-child td { border-bottom: none; }
+        .element-table tr:hover { background: var(--bg-cream); }
+        .element-table code {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: var(--adv-dark);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .tag-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 25px 0;
+        }
+
+        .tag-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tag-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--adv-color) 0%, var(--primary) 100%);
+        }
+
+        .tag-card:hover {
+            border-color: var(--adv-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.1);
+        }
+
+        .tag-card .tag-name {
+            font-family: 'Fira Code', monospace;
+            background: var(--adv-light);
+            color: var(--adv-dark);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 10px;
+            border: 1px solid var(--adv-soft);
+            direction: ltr;
+        }
+
+        .tag-card h5 { color: var(--text-dark); font-size: 1.05rem; margin-bottom: 8px; }
+        .tag-card p { color: var(--text-muted); font-size: 0.88rem; }
+
+        /* Effect Demos */
+        .effect-demo {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .effect-demo h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .demo-container {
+            background: var(--bg-cream);
+            border: 2px dashed var(--adv-color);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            min-height: 150px;
+        }
+
+        .demo-box {
+            background: var(--adv-color);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        /* Shadow Demo */
+        .shadow-box {
+            width: 120px;
+            height: 120px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .shadow-none { box-shadow: none; border: 2px solid var(--border); }
+        .shadow-sm { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .shadow-md { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .shadow-lg { box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .shadow-xl { box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
+        .shadow-colored { box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3); }
+
+        /* Gradient Demo */
+        .gradient-box {
+            width: 200px;
+            height: 120px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .grad-linear { background: linear-gradient(135deg, var(--adv-color), var(--primary)); }
+        .grad-radial { background: radial-gradient(circle, var(--adv-color), var(--primary)); }
+        .grad-multi { background: linear-gradient(90deg, #7C3AED, #4A7C59, #D4A574); }
+        .grad-angle { background: linear-gradient(45deg, #7C3AED, #D4A574); }
+
+        /* Transform Demo */
+        .transform-box {
+            width: 100px;
+            height: 100px;
+            background: var(--adv-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .transform-box:hover {
+            background: var(--primary);
+        }
+
+        .transform-translate:hover { transform: translate(20px, -20px); }
+        .transform-scale:hover { transform: scale(1.3); }
+        .transform-rotate:hover { transform: rotate(45deg); }
+        .transform-skew:hover { transform: skew(15deg, 5deg); }
+
+        /* Button Demo */
+        .btn-demo {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--adv-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .btn-demo:hover {
+            background: var(--adv-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-demo:active {
+            transform: translateY(-1px);
+        }
+
+        /* Debug Section */
+        .debug-box {
+            background: var(--danger-bg);
+            border: 2px solid var(--danger);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 30px 0;
+        }
+
+        .debug-box h3 {
+            color: #8B3A3A;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+
+        .debug-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .debug-wrong, .debug-right { border-radius: 10px; overflow: hidden; }
+        .debug-wrong { border: 2px solid var(--danger); }
+        .debug-right { border: 2px solid var(--success); }
+
+        .debug-label {
+            padding: 8px 15px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .debug-wrong .debug-label { background: var(--danger); color: white; }
+        .debug-right .debug-label { background: var(--success); color: white; }
+        .debug-wrong pre, .debug-right pre { background: var(--bg-card); padding: 15px; margin: 0; }
+
+        .quiz-section {
+            background: var(--bg-card);
+            border: 3px solid var(--success);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 8px 24px rgba(91, 140, 90, 0.1);
+        }
+
+        .quiz-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px dashed var(--success-bg);
+        }
+
+        .quiz-header-icon {
+            width: 55px; height: 55px;
+            background: linear-gradient(135deg, var(--success) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(91, 140, 90, 0.25);
+        }
+
+        .quiz-header h2 { color: var(--primary-dark); font-size: 1.6rem; }
+        .quiz-header p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .question {
+            background: var(--bg-cream);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .question:hover { border-color: var(--adv-color); background: var(--bg-soft); }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--adv-color) 0%, var(--primary) 100%);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(124, 58, 237, 0.25);
+        }
+
+        .question h4 { color: var(--text-dark); font-size: 1.05rem; margin-bottom: 15px; line-height: 1.6; }
+
+        .options { list-style: none; display: grid; gap: 10px; }
+
+        .options li {
+            background: var(--bg-card);
+            border: 2px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-body);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .options li:hover { border-color: var(--adv-color); background: var(--bg-cream); color: var(--text-dark); }
+
+        .option-letter {
+            width: 28px; height: 28px;
+            background: var(--adv-light);
+            border: 2px solid var(--adv-color);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--adv-dark);
+            flex-shrink: 0;
+        }
+
+        .homework-section {
+            background: var(--bg-card);
+            border: 3px solid var(--info);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 8px 24px rgba(91, 139, 160, 0.1);
+        }
+
+        .homework-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px dashed var(--info-bg);
+        }
+
+        .homework-header-icon {
+            width: 55px; height: 55px;
+            background: linear-gradient(135deg, var(--info) 0%, #3D6B80 100%);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(91, 139, 160, 0.25);
+        }
+
+        .homework-header h2 { color: #2E6B8A; font-size: 1.6rem; }
+        .homework-header p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .homework-item {
+            background: var(--bg-cream);
+            border: 2px solid var(--border);
+            border-right: 5px solid var(--info);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .homework-item:hover { border-color: var(--info); background: var(--info-bg); }
+
+        .homework-item h4 {
+            color: #2E6B8A;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .homework-item p { color: var(--text-body); margin-bottom: 10px; }
+
+        .homework-item ul { list-style: none; padding-right: 0; }
+
+        .homework-item ul li {
+            padding: 6px 0;
+            padding-right: 25px;
+            position: relative;
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        .homework-item ul li::before {
+            content: '◆';
+            position: absolute;
+            right: 0;
+            color: var(--info);
+            font-size: 0.7rem;
+            top: 10px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, var(--adv-light) 0%, var(--bg-soft) 100%);
+            border: 3px solid var(--adv-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+        }
+
+        .summary-box h3 { color: var(--adv-dark); font-size: 1.5rem; margin-bottom: 20px; }
+
+        .summary-list { list-style: none; }
+
+        .summary-list li {
+            padding: 10px 0;
+            padding-right: 35px;
+            position: relative;
+            color: var(--text-body);
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .summary-list li:last-child { border-bottom: none; }
+
+        .summary-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--success);
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+
+        .next-box {
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-soft) 100%);
+            border: 2px dashed var(--secondary);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .next-box h3 { color: var(--secondary-dark); margin-bottom: 10px; font-size: 1.3rem; }
+        .next-box p { color: var(--text-body); font-size: 1.05rem; }
+
+        .next-box .next-topic {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-soft) 100%);
+            border-top: 3px solid var(--primary);
+            padding: 40px 0;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        footer .logo { justify-content: center; margin-bottom: 20px; }
+        footer p { color: var(--text-muted); margin-bottom: 8px; }
+        footer .motto { color: var(--primary-dark); font-weight: 700; font-size: 1.1rem; margin-top: 15px; }
+
+        code.inline {
+            background: var(--adv-light);
+            border: 1px solid var(--adv-soft);
+            padding: 2px 8px;
+            border-radius: 5px;
+            color: var(--adv-dark);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        @media print {
+            @page { size: A4; margin: 1.5cm; }
+            body { background: white; font-size: 11pt; line-height: 1.5; }
+            header { position: static; box-shadow: none; }
+            .hero, section, .card, .question, .homework-item { page-break-inside: avoid; }
+            h1, h2, h3, h4 { page-break-after: avoid; }
+            .code-wrapper { page-break-inside: avoid; }
+            .debug-comparison, .tag-grid { grid-template-columns: 1fr; }
+            .demo-container { flex-direction: column; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .section-title { font-size: 1.5rem; }
+            .objectives-grid { grid-template-columns: 1fr; }
+            .tag-grid { grid-template-columns: 1fr; }
+            .debug-comparison { grid-template-columns: 1fr; }
+            .demo-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">S</div>
+                    <span>Sunshine T Academy</span>
+                </div>
+                <div class="lecture-badge">Frontend Level 1 • المحاضرة الثانية عشرة</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <section class="hero">
+            <span class="hero-tag">LECTURE 12</span>
+            <h1>Advanced CSS <span>& Effects</span></h1>
+            <p>اللمسات الاحترافية اللي بتفرق! هنشوف CSS Variables، Shadows، Gradients، Transitions، Transform، وكل اللي يخلي موقعك حيّ وجذاب.</p>
+        </section>
+
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🔄</div>
+                <span>مراجعة سريعة</span>
+            </h2>
+
+            <div class="review-box">
+                <h3>📚 من المحاضرة اللي فاتت</h3>
+                <ul class="review-list">
+                    <li>Responsive Web Design</li>
+                    <li>Media Queries + Mobile-first</li>
+                    <li>clamp(), min(), max()</li>
+                    <li>Responsive Images + Typography</li>
+                    <li>Layout Patterns</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>🎯 هدف النهاردة</h4>
+                <p>النهاردة هنضيف <strong>اللمسات الاحترافية</strong> لمواقعنا. هنتعلم إزاي نعمل CSS Variables عشان نعيد استخدام القيم، وShadows و Gradients عشان نضيف عمق وجمال، وTransitions وTransforms عشان نضيف حركات سلسة. ده اللي بيخلي الموقع يبقى <strong>حيّ وجذاب</strong>!</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🎯</div>
+                <span>الأهداف التعليمية</span>
+            </h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">في نهاية المحاضرة، الطالب هيقدر:</p>
+
+            <div class="objectives-grid">
+                <div class="objective-item">
+                    <div class="objective-number">1</div>
+                    <div>
+                        <h4>CSS Variables</h4>
+                        <p>Custom Properties لإعادة استخدام القيم</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">2</div>
+                    <div>
+                        <h4>calc()</h4>
+                        <p>حسابات رياضية في CSS</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">3</div>
+                    <div>
+                        <h4>Shadows</h4>
+                        <p>Box-shadow و Text-shadow</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">4</div>
+                    <div>
+                        <h4>Gradients</h4>
+                        <p>Linear و Radial gradients</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">5</div>
+                    <div>
+                        <h4>Transitions</h4>
+                        <p>حركات سلسة بين الحالات</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">6</div>
+                    <div>
+                        <h4>Transform</h4>
+                        <p>translate, scale, rotate, skew</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">7</div>
+                    <div>
+                        <h4>Pseudo-classes</h4>
+                        <p>:hover, :focus, :nth-child</p>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-number">8</div>
+                    <div>
+                        <h4>Pseudo-elements</h4>
+                        <p>::before, ::after</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CSS Variables ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🎨</div>
+                <span>CSS Variables (Custom Properties)</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 ما هي CSS Variables؟</h3>
+                <p><strong>CSS Variables</strong> (Custom Properties) هي طريقة لتخزين قيم في مكان واحد وإعادة استخدامها في كل الـ CSS. زي المتغيرات في أي لغة برمجة!</p>
+                <p>بتبدأ بـ <code class="inline">--</code> وبتستخدمها بـ <code class="inline">var()</code>.</p>
+            </div>
+
+            <div class="analogy-box">
+                <h3>💡 تشبيه من الحياة</h3>
+                <p>تخيل إنك في <strong>مطعم</strong>:</p>
+                <ul class="analogy-list">
+                    <li><strong>بدون Variables:</strong> كل طبق مكتوب فيه المكونات separately — لو عايز تغير حاجة، لازم تغير في كل طبق</li>
+                    <li><strong>مع Variables:</strong> عندك "قائمة مكونات" واحدة، وكل طبق بياخد منها — لو غيرت مكون واحد، بيتغير في كل الأطباق</li>
+                </ul>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — تعريف واستخدام Variables</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* تعريف المتغيرات في :root (عشان تكون متاحة في كل مكان) */</span>
+<span class="selector">:root</span> <span class="punctuation">{</span>
+    <span class="var-name">--primary-color</span><span class="punctuation">:</span> <span class="css-color-val">#4A7C59</span><span class="punctuation">;</span>
+    <span class="var-name">--secondary-color</span><span class="punctuation">:</span> <span class="css-color-val">#D4A574</span><span class="punctuation">;</span>
+    <span class="var-name">--font-size-base</span><span class="punctuation">:</span> <span class="css-number">16</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="var-name">--spacing-unit</span><span class="punctuation">:</span> <span class="css-number">1</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="var-name">--border-radius</span><span class="punctuation">:</span> <span class="css-number">8</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* استخدام المتغيرات */</span>
+<span class="selector">.button</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--primary-color</span>)<span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--spacing-unit</span>)<span class="punctuation">;</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--border-radius</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.card</span> <span class="punctuation">{</span>
+    <span class="property">border</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-value">solid</span> <span class="css-value">var</span>(<span class="var-name">--primary-color</span>)<span class="punctuation">;</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--border-radius</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Fallback Values</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* لو المتغير مش موجود، استخدم القيمة البديلة */</span>
+<span class="selector">.button</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--primary-color</span>, <span class="css-color-val">#4A7C59</span>)<span class="punctuation">;</span>
+    <span class="comment">/* لو --primary-color مش موجود، استخدم #4A7C59 */</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="success-box">
+                <h4>✅ ليه CSS Variables مهمة؟</h4>
+                <p>1. <strong>إعادة استخدام:</strong> عرّف القيمة مرة، استخدمها في كل مكان.</p>
+                <p>2. <strong>صيانة سهلة:</strong> غيّر اللون في مكان واحد، يتغير في كل الموقع.</p>
+                <p>3. <strong>Theming:</strong> اعمل Dark Mode بسهولة — غير القيم بس!</p>
+                <p>4. <strong>Responsive:</strong> غير القيم في media queries.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Dark Mode Example</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* Light Mode (Default) */</span>
+<span class="selector">:root</span> <span class="punctuation">{</span>
+    <span class="var-name">--bg-color</span><span class="punctuation">:</span> <span class="css-color-val">#FAF7F2</span><span class="punctuation">;</span>
+    <span class="var-name">--text-color</span><span class="punctuation">:</span> <span class="css-color-val">#4A3728</span><span class="punctuation">;</span>
+    <span class="var-name">--card-bg</span><span class="punctuation">:</span> <span class="css-color-val">#FFFFFF</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Dark Mode */</span>
+<span class="keyword">@media</span> (<span class="property">prefers-color-scheme</span>: <span class="css-value">dark</span>) <span class="punctuation">{</span>
+    <span class="selector">:root</span> <span class="punctuation">{</span>
+        <span class="var-name">--bg-color</span><span class="punctuation">:</span> <span class="css-color-val">#1a1a1a</span><span class="punctuation">;</span>
+        <span class="var-name">--text-color</span><span class="punctuation">:</span> <span class="css-color-val">#f5f5f5</span><span class="punctuation">;</span>
+        <span class="var-name">--card-bg</span><span class="punctuation">:</span> <span class="css-color-val">#2a2a2a</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+
+<span class="selector">body</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--bg-color</span>)<span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--text-color</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ========== calc() ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🧮</div>
+                <span>calc() — الحسابات في CSS</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 ما هي calc()؟</h3>
+                <p><code class="inline">calc()</code> بتسمحلك تعمل <strong>حسابات رياضية</strong> في CSS. تقدر تجمع، تطرح، تضرب، وتقسم قيم بوحدات مختلفة!</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — calc() Examples</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* جمع وحدات مختلفة */</span>
+<span class="selector">.sidebar</span> <span class="punctuation">{</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-value">calc</span>(<span class="css-number">100</span><span class="css-unit">%</span> - <span class="css-number">250</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+    <span class="comment">/* العرض = 100% من الأب - 250px */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* حساب padding */</span>
+<span class="selector">.container</span> <span class="punctuation">{</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-value">calc</span>(<span class="css-number">2</span><span class="css-unit">rem</span> + <span class="css-number">10</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* حساب font-size */</span>
+<span class="selector">h1</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-value">calc</span>(<span class="css-number">1.5</span><span class="css-unit">rem</span> + <span class="css-number">2</span><span class="css-unit">vw</span>)<span class="punctuation">;</span>
+    <span class="comment">/* حجم خط متجاوب */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* طرح */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-value">calc</span>(<span class="css-number">50</span><span class="css-unit">%</span> - <span class="css-number">20</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ضرب */</span>
+<span class="selector">.item</span> <span class="punctuation">{</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-value">calc</span>(<span class="css-number">25</span><span class="css-unit">%</span> * <span class="css-number">2</span>)<span class="punctuation">;</span> <span class="comment">= 50% */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* قسمة */</span>
+<span class="selector">.item</span> <span class="punctuation">{</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-value">calc</span>(<span class="css-number">100</span><span class="css-unit">%</span> / <span class="css-number">3</span>)<span class="punctuation">;</span> <span class="comment">= 33.33% */</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ قواعد مهمة</h4>
+                <p>• لازم يكون في <strong>مسافة</strong> حول العمليات (+, -): <code class="inline">calc(100% - 20px)</code> ✓</p>
+                <p>• مش لازم في *, /: <code class="inline">calc(100% / 3)</code> ✓</p>
+                <p>• ممكن تعمل nesting: <code class="inline">calc(100% - calc(50px + 2rem))</code></p>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 ملاحظة</h4>
+                <p>في معظم الحالات، <code class="inline">clamp()</code> أفضل من <code class="inline">calc()</code> للـ responsive. لكن <code class="inline">calc()</code> لسه مفيدة في حالات كتير.</p>
+            </div>
+        </section>
+
+        <!-- ========== Shadows ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🌑</div>
+                <span>Shadows — الظلال</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 أنواع الظلال</h3>
+                <p>في CSS عندنا نوعين من الظلال:</p>
+                <p>1. <strong>box-shadow:</strong> ظل حول العنصر كله (Box)</p>
+                <p>2. <strong>text-shadow:</strong> ظل على النص فقط</p>
+            </div>
+
+            <!-- Box Shadow -->
+            <div class="card">
+                <h3>🔹 Box Shadow</h3>
+                <p><code class="inline">box-shadow</code> بتضيف ظل حول العنصر. الصيغة:</p>
+                <p style="font-family: 'Fira Code', monospace; direction: ltr; text-align: left; background: var(--bg-code); padding: 10px; border-radius: 6px; font-size: 0.9rem; margin-top: 10px;">
+                    box-shadow: offset-x offset-y blur-radius spread-radius color;
+                </p>
+            </div>
+
+            <div class="effect-demo">
+                <h4>🌑 أمثلة حية لـ Box Shadow</h4>
+                <div class="demo-container">
+                    <div class="shadow-box shadow-none">none</div>
+                    <div class="shadow-box shadow-sm">small</div>
+                    <div class="shadow-box shadow-md">medium</div>
+                    <div class="shadow-box shadow-lg">large</div>
+                    <div class="shadow-box shadow-xl">x-large</div>
+                    <div class="shadow-box shadow-colored">colored</div>
+                </div>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Box Shadow</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* Box Shadow بسيط */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="adv-prop">box-shadow</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">4</span><span class="css-unit">px</span> <span class="css-number">12</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>, <span class="css-number">0</span>, <span class="css-number">0</span>, <span class="css-number">0.15</span>)<span class="punctuation">;</span>
+    <span class="comment">/* offset-x | offset-y | blur | color */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* مع spread */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="adv-prop">box-shadow</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">30</span><span class="css-unit">px</span> <span class="css-number">5</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>, <span class="css-number">0</span>, <span class="css-number">0</span>, <span class="css-number">0.2</span>)<span class="punctuation">;</span>
+    <span class="comment">/* offset-x | offset-y | blur | spread | color */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ظل ملون */</span>
+<span class="selector">.card</span> <span class="punctuation">{</span>
+    <span class="adv-prop">box-shadow</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">30</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">124</span>, <span class="css-number">58</span>, <span class="css-number">237</span>, <span class="css-number">0.3</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ظلال متعددة */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="adv-prop">box-shadow</span><span class="punctuation">:</span> 
+        <span class="css-number">0</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-number">4</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0.1</span>)<span class="punctuation">,</span>
+        <span class="css-number">0</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">20</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0.15</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ظل داخلي (inset) */</span>
+<span class="selector">.input</span> <span class="punctuation">{</span>
+    <span class="adv-prop">box-shadow</span><span class="punctuation">:</span> <span class="css-value">inset</span> <span class="css-number">0</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-number">4</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0.1</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <!-- Text Shadow -->
+            <div class="card">
+                <h3>🔹 Text Shadow</h3>
+                <p><code class="inline">text-shadow</code> بتضيف ظل على النص. الصيغة:</p>
+                <p style="font-family: 'Fira Code', monospace; direction: ltr; text-align: left; background: var(--bg-code); padding: 10px; border-radius: 6px; font-size: 0.9rem; margin-top: 10px;">
+                    text-shadow: offset-x offset-y blur-radius color;
+                </p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Text Shadow</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* Text Shadow بسيط */</span>
+<span class="selector">h1</span> <span class="punctuation">{</span>
+    <span class="adv-prop">text-shadow</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-number">4</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>, <span class="css-number">0</span>, <span class="css-number">0</span>, <span class="css-number">0.3</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* تأثير Emboss */</span>
+<span class="selector">.emboss</span> <span class="punctuation">{</span>
+    <span class="adv-prop">text-shadow</span><span class="punctuation">:</span> <span class="css-number">1</span><span class="css-unit">px</span> <span class="css-number">1</span><span class="css-unit">px</span> <span class="css-color-val">white</span><span class="punctuation">,</span> <span class="css-number">-1</span><span class="css-unit">px</span> <span class="css-number">-1</span><span class="css-unit">px</span> <span class="css-color-val">black</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* تأثير Neon */</span>
+<span class="selector">.neon</span> <span class="punctuation">{</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">white</span><span class="punctuation">;</span>
+    <span class="adv-prop">text-shadow</span><span class="punctuation">:</span> 
+        <span class="css-number">0</span> <span class="css-number">0</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">,</span>
+        <span class="css-number">0</span> <span class="css-number">0</span> <span class="css-number">20</span><span class="css-unit">px</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">,</span>
+        <span class="css-number">0</span> <span class="css-number">0</span> <span class="css-number">30</span><span class="css-unit">px</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ========== Gradients ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🌈</div>
+                <span>Gradients — التدرجات اللونية</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 ما هي Gradients؟</h3>
+                <p><strong>Gradients</strong> بتسمحلك تعمل انتقال سلس بين لونين أو أكتر. بتستخدم كـ <code class="inline">background</code>.</p>
+            </div>
+
+            <div class="effect-demo">
+                <h4>🌈 أمثلة حية لـ Gradients</h4>
+                <div class="demo-container">
+                    <div class="gradient-box grad-linear">Linear<br>135deg</div>
+                    <div class="gradient-box grad-radial">Radial<br>Circle</div>
+                    <div class="gradient-box grad-multi">Multi-color<br>90deg</div>
+                    <div class="gradient-box grad-angle">Linear<br>45deg</div>
+                </div>
+            </div>
+
+            <!-- Linear Gradient -->
+            <div class="card">
+                <h3>🔹 Linear Gradient</h3>
+                <p>تدرج خطي — من اتجاه معين.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Linear Gradient</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* من فوق لتحت (الافتراضي) */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">linear-gradient</span>(<span class="css-color-val">#7C3AED</span>, <span class="css-color-val">#4A7C59</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* من اليسار لليمين */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">linear-gradient</span>(<span class="css-value">to right</span>, <span class="css-color-val">#7C3AED</span>, <span class="css-color-val">#4A7C59</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* بزاوية */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">linear-gradient</span>(<span class="css-number">135</span><span class="css-unit">deg</span>, <span class="css-color-val">#7C3AED</span>, <span class="css-color-val">#4A7C59</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* 3 ألوان */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">linear-gradient</span>(<span class="css-number">90</span><span class="css-unit">deg</span>, <span class="css-color-val">#7C3AED</span>, <span class="css-color-val">#4A7C59</span>, <span class="css-color-val">#D4A574</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* مع color stops */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">linear-gradient</span>(<span class="css-value">to right</span>, 
+        <span class="css-color-val">#7C3AED</span> <span class="css-number">0</span><span class="css-unit">%</span>, 
+        <span class="css-color-val">#4A7C59</span> <span class="css-number">50</span><span class="css-unit">%</span>, 
+        <span class="css-color-val">#D4A574</span> <span class="css-number">100</span><span class="css-unit">%</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <!-- Radial Gradient -->
+            <div class="card">
+                <h3>🔹 Radial Gradient</h3>
+                <p>تدرج دائري — من المركز للخارج.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Radial Gradient</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* دائري (الافتراضي) */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">radial-gradient</span>(<span class="css-color-val">#7C3AED</span>, <span class="css-color-val">#4A7C59</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* بيضاوي */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">radial-gradient</span>(<span class="css-value">ellipse</span>, <span class="css-color-val">#7C3AED</span>, <span class="css-color-val">#4A7C59</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* من موقع معين */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">radial-gradient</span>(<span class="css-value">circle at top right</span>, <span class="css-color-val">#7C3AED</span>, <span class="css-color-val">#4A7C59</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="success-box">
+                <h4>✨ نصيحة</h4>
+                <p>استخدم مواقع زي <strong>gradienthunt.com</strong> أو <strong>uigradients.com</strong> عشان تلاقي gradients جاهزة وجميلة.</p>
+            </div>
+        </section>
+
+        <!-- ========== Transitions ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🎬</div>
+                <span>Transitions — الحركات السلسة</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 ما هي Transitions؟</h3>
+                <p><strong>Transitions</strong> بتخلي التغييرات في CSS <strong>سلسة وتدرجية</strong> بدلاً من فورية. مثلاً: لما تعمل hover على زر، اللون بيتغير ببطء بدلاً من فجأة.</p>
+            </div>
+
+            <div class="effect-demo">
+                <h4>🎬 جرب الـ Hover!</h4>
+                <div class="demo-container">
+                    <button class="btn-demo">Hover Me</button>
+                    <button class="btn-demo" style="background: var(--primary);">Hover Me</button>
+                    <button class="btn-demo" style="background: var(--secondary-dark);">Hover Me</button>
+                </div>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Transition</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* Transition بسيط */</span>
+<span class="selector">.button</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">white</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">12</span><span class="css-unit">px</span> <span class="css-number">30</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span> <span class="css-number">8</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="css-value">all</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+    <span class="comment">/* property | duration | timing-function */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.button:hover</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#5B21B6</span><span class="punctuation">;</span>
+    <span class="property">transform</span><span class="punctuation">:</span> <span class="css-value">translateY</span>(<span class="css-number">-3</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+    <span class="property">box-shadow</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">20</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">124</span>, <span class="css-number">58</span>, <span class="css-number">237</span>, <span class="css-number">0.3</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Transition على property معينة */</span>
+<span class="selector">.card</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="css-value">transform</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span>, <span class="css-value">box-shadow</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔍 Transition Properties</h3>
+                <table class="element-table">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>المعنى</th>
+                            <th>مثال</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>transition-property</code></td>
+                            <td>الخاصية اللي هتتحرك</td>
+                            <td>all, transform, opacity, background</td>
+                        </tr>
+                        <tr>
+                            <td><code>transition-duration</code></td>
+                            <td>مدة الحركة</td>
+                            <td>0.3s, 500ms, 1s</td>
+                        </tr>
+                        <tr>
+                            <td><code>transition-timing-function</code></td>
+                            <td>نوع الحركة</td>
+                            <td>ease, linear, ease-in, ease-out, ease-in-out</td>
+                        </tr>
+                        <tr>
+                            <td><code>transition-delay</code></td>
+                            <td>تأخير قبل البدء</td>
+                            <td>0s, 0.2s, 100ms</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>🔍 Timing Functions</h3>
+                <table class="element-table">
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>السلوك</th>
+                            <th>الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>ease</code></td>
+                            <td>بطيء في البداية والنهاية</td>
+                            <td>الافتراضي — الأكثر استخداماً</td>
+                        </tr>
+                        <tr>
+                            <td><code>linear</code></td>
+                            <td>سرعة ثابتة</td>
+                            <td>Loading bars, animations</td>
+                        </tr>
+                        <tr>
+                            <td><code>ease-in</code></td>
+                            <td>بيبدأ بطيء وبيسرع</td>
+                            <td>Elements entering</td>
+                        </tr>
+                        <tr>
+                            <td><code>ease-out</code></td>
+                            <td>بيبدأ سريع وبيبطئ</td>
+                            <td>Elements leaving</td>
+                        </tr>
+                        <tr>
+                            <td><code>ease-in-out</code></td>
+                            <td>بطيء في البداية والنهاية</td>
+                            <td>Smooth transitions</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========== Transform ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🔄</div>
+                <span>Transform — تحويل العناصر</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 ما هو Transform؟</h3>
+                <p><strong>Transform</strong> بيخليك تحول العنصر: تحركه، تكبره، تدوره، أو تميله. من غير ما تأثر على العناصر التانية!</p>
+            </div>
+
+            <div class="effect-demo">
+                <h4>🔄 جرب الـ Hover!</h4>
+                <div class="demo-container">
+                    <div class="transform-box transform-translate">Translate<br>(Hover)</div>
+                    <div class="transform-box transform-scale">Scale<br>(Hover)</div>
+                    <div class="transform-box transform-rotate">Rotate<br>(Hover)</div>
+                    <div class="transform-box transform-skew">Skew<br>(Hover)</div>
+                </div>
+            </div>
+
+            <div class="tag-grid">
+                <div class="tag-card">
+                    <span class="tag-name">translate()</span>
+                    <h5>تحريك</h5>
+                    <p>يحرك العنصر من مكانه. translate(x, y)</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">scale()</span>
+                    <h5>تكبير/تصغير</h5>
+                    <p>يكبر أو يصغر العنصر. scale(1.5) = 150%</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">rotate()</span>
+                    <h5>تدوير</h5>
+                    <p>يدور العنصر. rotate(45deg)</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">skew()</span>
+                    <h5>إمالة</h5>
+                    <p>يميل العنصر. skew(15deg, 5deg)</p>
+                </div>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Transform</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* Translate — تحريك */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">translate</span>(<span class="css-number">50</span><span class="css-unit">px</span>, <span class="css-number">100</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+    <span class="comment">/* 50px يمين، 100px تحت */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Translate منفصل */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">translateX</span>(<span class="css-number">50</span><span class="css-unit">px</span>) <span class="css-value">translateY</span>(<span class="css-number">100</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Scale — تكبير/تصغير */</span>
+<span class="selector">.box:hover</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">scale</span>(<span class="css-number">1.2</span>)<span class="punctuation">;</span> <span class="comment">/* 120% */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.box:hover</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">scale</span>(<span class="css-number">0.8</span>)<span class="punctuation">;</span> <span class="comment">/* 80% */</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Rotate — تدوير */</span>
+<span class="selector">.box:hover</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">rotate</span>(<span class="css-number">45</span><span class="css-unit">deg</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Skew — إمالة */</span>
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">skew</span>(<span class="css-number">15</span><span class="css-unit">deg</span>, <span class="css-number">5</span><span class="css-unit">deg</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Transform متعددة مع بعض */</span>
+<span class="selector">.box:hover</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">translateY</span>(<span class="css-number">-10</span><span class="css-unit">px</span>) <span class="css-value">scale</span>(<span class="css-number">1.05</span>) <span class="css-value">rotate</span>(<span class="css-number">2</span><span class="css-unit">deg</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ ملاحظة مهمة</h4>
+                <p>Transform <strong>مش بيأثر على الـ Document Flow</strong> — يعني العناصر التانية مش بتتحرك. ده بيخليه ممتاز للـ animations!</p>
+            </div>
+
+            <div class="success-box">
+                <h4>✨ Best Practice</h4>
+                <p>دايماً استخدم <code class="inline">transition</code> مع <code class="inline">transform</code> عشان الحركة تبقى سلسة:</p>
+                <p style="margin-top: 10px; font-family: 'Fira Code', monospace; direction: ltr; text-align: left; background: var(--bg-code); padding: 10px; border-radius: 6px; font-size: 0.85rem; line-height: 1.8;">
+                    .box {<br>
+                    &nbsp;&nbsp;transition: transform 0.3s ease;<br>
+                    }<br>
+                    .box:hover {<br>
+                    &nbsp;&nbsp;transform: translateY(-5px);<br>
+                    }
+                </p>
+            </div>
+        </section>
+
+        <!-- ========== Hover Effects ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🖱️</div>
+                <span>Hover Effects — تأثيرات التفاعل</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 Pseudo-classes للتفاعل</h3>
+                <p>في CSS pseudo-classes كتير بتسمحلك تتحكم في شكل العنصر حسب حالة التفاعل:</p>
+            </div>
+
+            <div class="tag-grid">
+                <div class="tag-card">
+                    <span class="tag-name">:hover</span>
+                    <h5>عند المرور</h5>
+                    <p>لما الماوس يكون فوق العنصر</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">:focus</span>
+                    <h5>عند التركيز</h5>
+                    <p>لما العنصر ياخد focus (بالـ keyboard)</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">:active</span>
+                    <h5>عند الضغط</h5>
+                    <p>لما العنصر يتضغط (mousedown)</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">:visited</span>
+                    <h5>رابط تمت زيارته</h5>
+                    <p>للروابط اللي المستخدم زارها قبل كده</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">:first-child</span>
+                    <h5>أول عنصر</h5>
+                    <p>العنصر الأول في الأب</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">:nth-child(n)</span>
+                    <h5>العنصر رقم n</h5>
+                    <p>اختيار عنصر معين بالترتيب</p>
+                </div>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Pseudo-classes</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* Hover */</span>
+<span class="selector">.button:hover</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#5B21B6</span><span class="punctuation">;</span>
+    <span class="property">transform</span><span class="punctuation">:</span> <span class="css-value">translateY</span>(<span class="css-number">-3</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Focus — مهم لـ Accessibility */</span>
+<span class="selector">.input:focus</span> <span class="punctuation">{</span>
+    <span class="property">border-color</span><span class="punctuation">:</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span>
+    <span class="property">box-shadow</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">0</span> <span class="css-number">0</span> <span class="css-number">3</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">124</span>, <span class="css-number">58</span>, <span class="css-number">237</span>, <span class="css-number">0.2</span>)<span class="punctuation">;</span>
+    <span class="property">outline</span><span class="punctuation">:</span> <span class="css-value">none</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Active */</span>
+<span class="selector">.button:active</span> <span class="punctuation">{</span>
+    <span class="property">transform</span><span class="punctuation">:</span> <span class="css-value">translateY</span>(<span class="css-number">-1</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* First & Last Child */</span>
+<span class="selector">.item:first-child</span> <span class="punctuation">{</span>
+    <span class="property">border-top</span><span class="punctuation">:</span> <span class="css-value">none</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.item:last-child</span> <span class="punctuation">{</span>
+    <span class="property">border-bottom</span><span class="punctuation">:</span> <span class="css-value">none</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Nth Child */</span>
+<span class="selector">.item:nth-child(odd)</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#f5f5f5</span><span class="punctuation">;</span> <span class="comment">/* صفوف فردية */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.item:nth-child(even)</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#ffffff</span><span class="punctuation">;</span> <span class="comment">/* صفوف زوجية */</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.item:nth-child(3n)</span> <span class="punctuation">{</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span> <span class="comment">/* كل 3 عناصر */</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Hover Effects شائعة</h3>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Hover Effects</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* 1. Card Lift Effect */</span>
+<span class="selector">.card</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="css-value">transform</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span>, <span class="css-value">box-shadow</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.card:hover</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">translateY</span>(<span class="css-number">-5</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+    <span class="property">box-shadow</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">15</span><span class="css-unit">px</span> <span class="css-number">30</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0.15</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* 2. Button Ripple Effect */</span>
+<span class="selector">.btn</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="css-value">all</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+    <span class="property">position</span><span class="punctuation">:</span> <span class="css-value">relative</span><span class="punctuation">;</span>
+    <span class="property">overflow</span><span class="punctuation">:</span> <span class="css-value">hidden</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.btn:hover</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#5B21B6</span><span class="punctuation">;</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">scale</span>(<span class="css-number">1.05</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* 3. Image Zoom */</span>
+<span class="selector">.image-container</span> <span class="punctuation">{</span>
+    <span class="property">overflow</span><span class="punctuation">:</span> <span class="css-value">hidden</span><span class="punctuation">;</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span> <span class="css-number">12</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.image-container</span> <span class="selector">img</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="css-value">transform</span> <span class="css-number">0.5</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.image-container:hover</span> <span class="selector">img</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">scale</span>(<span class="css-number">1.1</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* 4. Link Underline Animation */</span>
+<span class="selector">.link</span> <span class="punctuation">{</span>
+    <span class="property">position</span><span class="punctuation">:</span> <span class="css-value">relative</span><span class="punctuation">;</span>
+    <span class="property">text-decoration</span><span class="punctuation">:</span> <span class="css-value">none</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.link::after</span> <span class="punctuation">{</span>
+    <span class="property">content</span><span class="punctuation">:</span> <span class="css-value">''</span><span class="punctuation">;</span>
+    <span class="property">position</span><span class="punctuation">:</span> <span class="css-value">absolute</span><span class="punctuation">;</span>
+    <span class="property">bottom</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">right</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">height</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="css-value">width</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.link:hover::after</span> <span class="punctuation">{</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">100</span><span class="css-unit">%</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ========== Pseudo-elements ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">✨</div>
+                <span>Pseudo-elements — العناصر الزائفة</span>
+            </h2>
+
+            <div class="card">
+                <h3>📖 ما هي Pseudo-elements؟</h3>
+                <p><strong>Pseudo-elements</strong> بتسمحلك تضيف محتوى <strong>جديد</strong> قبل أو بعد العنصر، من غير ما تغير HTML.</p>
+                <p>بتبدأ بـ <code class="inline">::</code> (colon مزدوج).</p>
+            </div>
+
+            <div class="tag-grid">
+                <div class="tag-card">
+                    <span class="tag-name">::before</span>
+                    <h5>قبل العنصر</h5>
+                    <p>يضيف محتوى قبل محتوى العنصر</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">::after</span>
+                    <h5>بعد العنصر</h5>
+                    <p>يضيف محتوى بعد محتوى العنصر</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">::first-letter</span>
+                    <h5>أول حرف</h5>
+                    <p>يختار أول حرف في العنصر</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">::first-line</span>
+                    <h5>أول سطر</h5>
+                    <p>يختار أول سطر في العنصر</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">::selection</span>
+                    <h5>النص المحدد</h5>
+                    <p>يغير شكل النص لما يتحدد بالماوس</p>
+                </div>
+                <div class="tag-card">
+                    <span class="tag-name">::placeholder</span>
+                    <h5>Placeholder</h5>
+                    <p>يغير شكل النص الـ placeholder في inputs</p>
+                </div>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">CSS — Pseudo-elements</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* ::before و ::after */</span>
+<span class="selector">.quote::before</span> <span class="punctuation">{</span>
+    <span class="property">content</span><span class="punctuation">:</span> <span class="css-value">'"'</span><span class="punctuation">;</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">3</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span>
+    <span class="property">position</span><span class="punctuation">:</span> <span class="css-value">absolute</span><span class="punctuation">;</span>
+    <span class="property">top</span><span class="punctuation">:</span> <span class="css-number">-10</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">right</span><span class="punctuation">:</span> <span class="css-number">-20</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.badge::after</span> <span class="punctuation">{</span>
+    <span class="property">content</span><span class="punctuation">:</span> <span class="css-value">'✓'</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">white</span><span class="punctuation">;</span>
+    <span class="property">margin-right</span><span class="punctuation">:</span> <span class="css-number">5</span><span class="css-unit">px</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ::first-letter */</span>
+<span class="selector">p::first-letter</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">900</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ::selection */</span>
+<span class="selector">::selection</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">white</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ::placeholder */</span>
+<span class="selector">input::placeholder</span> <span class="punctuation">{</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-color-val">#999</span><span class="punctuation">;</span>
+    <span class="property">font-style</span><span class="punctuation">:</span> <span class="css-value">italic</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ قاعدة مهمة</h4>
+                <p><code class="inline">::before</code> و <code class="inline">::after</code> <strong>لازم</strong> يكون فيهم <code class="inline">content</code> property — حتى لو فاضي <code class="inline">content: ''</code>. من غيرها مش هيشتغلوا!</p>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 استخدامات شائعة</h4>
+                <p>• إضافة أيقونات قبل/بعد النصوص</p>
+                <p>• عمل shapes و decorations</p>
+                <p>• Clearfix hack (قديم)</p>
+                <p>• Tooltips</p>
+                <p>• Custom bullets في القوائم</p>
+            </div>
+        </section>
+
+        <!-- ========== Complete Example ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🎨</div>
+                <span>مثال شامل — Animated Cards</span>
+            </h2>
+
+            <div class="card">
+                <h3>📋 كود كامل يجمع كل اللي اتعلمناه</h3>
+                <p>ده مثال لـ Cards مع كل التأثيرات: Variables, Shadows, Gradients, Transitions, Transforms, Hover effects.</p>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">index.html</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="value">"ar"</span> <span class="attr">dir</span>=<span class="value">"rtl"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="value">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="value">"viewport"</span> <span class="attr">content</span>=<span class="value">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span><span class="text">Animated Cards</span><span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="value">"stylesheet"</span> <span class="attr">href</span>=<span class="value">"css/style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;section</span> <span class="attr">class</span>=<span class="value">"cards-section"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;h2</span> <span class="attr">class</span>=<span class="value">"section-title"</span><span class="tag">&gt;</span><span class="text">خدماتنا</span><span class="tag">&lt;/h2&gt;</span>
+        
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"cards-container"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"card"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"card-icon"</span><span class="tag">&gt;</span><span class="text">🎨</span><span class="tag">&lt;/div&gt;</span>
+                <span class="tag">&lt;h3&gt;</span><span class="text">تصميم</span><span class="tag">&lt;/h3&gt;</span>
+                <span class="tag">&lt;p&gt;</span><span class="text">تصميم مواقع احترافية وجذابة</span><span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"#"</span> <span class="attr">class</span>=<span class="value">"card-link"</span><span class="tag">&gt;</span><span class="text">اعرف أكتر ←</span><span class="tag">&lt;/a&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+            
+            <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"card"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"card-icon"</span><span class="tag">&gt;</span><span class="text">💻</span><span class="tag">&lt;/div&gt;</span>
+                <span class="tag">&lt;h3&gt;</span><span class="text">تطوير</span><span class="tag">&lt;/h3&gt;</span>
+                <span class="tag">&lt;p&gt;</span><span class="text">تطوير مواقع متجاوبة وسريعة</span><span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"#"</span> <span class="attr">class</span>=<span class="value">"card-link"</span><span class="tag">&gt;</span><span class="text">اعرف أكتر ←</span><span class="tag">&lt;/a&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+            
+            <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"card"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="value">"card-icon"</span><span class="tag">&gt;</span><span class="text">🚀</span><span class="tag">&lt;/div&gt;</span>
+                <span class="tag">&lt;h3&gt;</span><span class="text">إطلاق</span><span class="tag">&lt;/h3&gt;</span>
+                <span class="tag">&lt;p&gt;</span><span class="text">نشر الموقع وتحسين الأداء</span><span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"#"</span> <span class="attr">class</span>=<span class="value">"card-link"</span><span class="tag">&gt;</span><span class="text">اعرف أكتر ←</span><span class="tag">&lt;/a&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/section&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+            </div>
+
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <span class="code-lang">css/style.css</span>
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                </div>
+<pre><code><span class="comment">/* ===== CSS Variables ===== */</span>
+<span class="selector">:root</span> <span class="punctuation">{</span>
+    <span class="var-name">--primary</span><span class="punctuation">:</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span>
+    <span class="var-name">--primary-dark</span><span class="punctuation">:</span> <span class="css-color-val">#5B21B6</span><span class="punctuation">;</span>
+    <span class="var-name">--secondary</span><span class="punctuation">:</span> <span class="css-color-val">#4A7C59</span><span class="punctuation">;</span>
+    <span class="var-name">--text-dark</span><span class="punctuation">:</span> <span class="css-color-val">#2C1810</span><span class="punctuation">;</span>
+    <span class="var-name">--text-body</span><span class="punctuation">:</span> <span class="css-color-val">#4A3728</span><span class="punctuation">;</span>
+    <span class="var-name">--bg-card</span><span class="punctuation">:</span> <span class="css-color-val">#FFFFFF</span><span class="punctuation">;</span>
+    <span class="var-name">--shadow-sm</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-number">8</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0.08</span>)<span class="punctuation">;</span>
+    <span class="var-name">--shadow-md</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">8</span><span class="css-unit">px</span> <span class="css-number">20</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0.12</span>)<span class="punctuation">;</span>
+    <span class="var-name">--shadow-lg</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">15</span><span class="css-unit">px</span> <span class="css-number">40</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">124</span>,<span class="css-number">58</span>,<span class="css-number">237</span>,<span class="css-number">0.2</span>)<span class="punctuation">;</span>
+    <span class="var-name">--radius</span><span class="punctuation">:</span> <span class="css-number">16</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="var-name">--transition</span><span class="punctuation">:</span> <span class="css-value">all</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ===== Reset ===== */</span>
+<span class="selector">*</span> <span class="punctuation">{</span> <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span> <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span> <span class="property">box-sizing</span><span class="punctuation">:</span> <span class="css-value">border-box</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+
+<span class="selector">body</span> <span class="punctuation">{</span>
+    <span class="property">font-family</span><span class="punctuation">:</span> <span class="css-value">'Cairo', sans-serif</span><span class="punctuation">;</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">linear-gradient</span>(<span class="css-number">135</span><span class="css-unit">deg</span>, <span class="css-color-val">#FAF7F2</span> <span class="css-number">0</span><span class="css-unit">%</span>, <span class="css-color-val">#EDE5D8</span> <span class="css-number">100</span><span class="css-unit">%</span>)<span class="punctuation">;</span>
+    <span class="property">min-height</span><span class="punctuation">:</span> <span class="css-number">100</span><span class="css-unit">vh</span><span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">4</span><span class="css-unit">rem</span> <span class="css-number">2</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ===== Section ===== */</span>
+<span class="selector">.cards-section</span> <span class="punctuation">{</span>
+    <span class="property">max-width</span><span class="punctuation">:</span> <span class="css-number">1200</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">margin</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-value">auto</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.section-title</span> <span class="punctuation">{</span>
+    <span class="property">text-align</span><span class="punctuation">:</span> <span class="css-value">center</span><span class="punctuation">;</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-value">clamp</span>(<span class="css-number">2</span><span class="css-unit">rem</span>, <span class="css-number">5</span><span class="css-unit">vw</span>, <span class="css-number">3</span><span class="css-unit">rem</span>)<span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--primary</span>)<span class="punctuation">;</span>
+    <span class="property">margin-bottom</span><span class="punctuation">:</span> <span class="css-number">3</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="adv-prop">text-shadow</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-number">2</span><span class="css-unit">px</span> <span class="css-number">4</span><span class="css-unit">px</span> <span class="css-value">rgba</span>(<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0.1</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ===== Cards Container ===== */</span>
+<span class="selector">.cards-container</span> <span class="punctuation">{</span>
+    <span class="property">display</span><span class="punctuation">:</span> <span class="css-value">grid</span><span class="punctuation">;</span>
+    <span class="property">grid-template-columns</span><span class="punctuation">:</span> <span class="css-value">repeat</span>(<span class="css-value">auto-fit</span>, <span class="css-value">minmax</span>(<span class="css-number">280</span><span class="css-unit">px</span>, <span class="css-number">1</span><span class="css-unit">fr</span>))<span class="punctuation">;</span>
+    <span class="property">gap</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* ===== Card ===== */</span>
+<span class="selector">.card</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--bg-card</span>)<span class="punctuation">;</span>
+    <span class="property">padding</span><span class="punctuation">:</span> <span class="css-number">2.5</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">border-radius</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--radius</span>)<span class="punctuation">;</span>
+    <span class="property">box-shadow</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--shadow-sm</span>)<span class="punctuation">;</span>
+    <span class="property">text-align</span><span class="punctuation">:</span> <span class="css-value">center</span><span class="punctuation">;</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--transition</span>)<span class="punctuation">;</span>
+    <span class="property">position</span><span class="punctuation">:</span> <span class="css-value">relative</span><span class="punctuation">;</span>
+    <span class="property">overflow</span><span class="punctuation">:</span> <span class="css-value">hidden</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Card Hover Effect */</span>
+<span class="selector">.card:hover</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">translateY</span>(<span class="css-number">-10</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+    <span class="property">box-shadow</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--shadow-lg</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Gradient Overlay on Hover */</span>
+<span class="selector">.card::before</span> <span class="punctuation">{</span>
+    <span class="property">content</span><span class="punctuation">:</span> <span class="css-value">''</span><span class="punctuation">;</span>
+    <span class="property">position</span><span class="punctuation">:</span> <span class="css-value">absolute</span><span class="punctuation">;</span>
+    <span class="property">top</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">right</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">100</span><span class="css-unit">%</span><span class="punctuation">;</span>
+    <span class="property">height</span><span class="punctuation">:</span> <span class="css-number">4</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">linear-gradient</span>(<span class="css-number">90</span><span class="css-unit">deg</span>, <span class="css-value">var</span>(<span class="var-name">--primary</span>), <span class="css-value">var</span>(<span class="var-name">--secondary</span>))<span class="punctuation">;</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">scaleX</span>(<span class="css-number">0</span>)<span class="punctuation">;</span>
+    <span class="adv-prop">transform-origin</span><span class="punctuation">:</span> <span class="css-value">right</span><span class="punctuation">;</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="adv-prop">transform</span> <span class="css-number">0.4</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.card:hover::before</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">scaleX</span>(<span class="css-number">1</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Card Icon */</span>
+<span class="selector">.card-icon</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">3</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">margin-bottom</span><span class="punctuation">:</span> <span class="css-number">1</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="adv-prop">transform</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.card:hover .card-icon</span> <span class="punctuation">{</span>
+    <span class="adv-prop">transform</span><span class="punctuation">:</span> <span class="css-value">scale</span>(<span class="css-number">1.2</span>) <span class="css-value">rotate</span>(<span class="css-number">10</span><span class="css-unit">deg</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Card Title */</span>
+<span class="selector">.card</span> <span class="selector">h3</span> <span class="punctuation">{</span>
+    <span class="property">font-size</span><span class="punctuation">:</span> <span class="css-number">1.5</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--primary</span>)<span class="punctuation">;</span>
+    <span class="property">margin-bottom</span><span class="punctuation">:</span> <span class="css-number">1</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Card Text */</span>
+<span class="selector">.card</span> <span class="selector">p</span> <span class="punctuation">{</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--text-body</span>)<span class="punctuation">;</span>
+    <span class="property">line-height</span><span class="punctuation">:</span> <span class="css-number">1.6</span><span class="punctuation">;</span>
+    <span class="property">margin-bottom</span><span class="punctuation">:</span> <span class="css-number">1.5</span><span class="css-unit">rem</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="comment">/* Card Link */</span>
+<span class="selector">.card-link</span> <span class="punctuation">{</span>
+    <span class="property">display</span><span class="punctuation">:</span> <span class="css-value">inline-block</span><span class="punctuation">;</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--primary</span>)<span class="punctuation">;</span>
+    <span class="property">text-decoration</span><span class="punctuation">:</span> <span class="css-value">none</span><span class="punctuation">;</span>
+    <span class="property">font-weight</span><span class="punctuation">:</span> <span class="css-number">700</span><span class="punctuation">;</span>
+    <span class="property">position</span><span class="punctuation">:</span> <span class="css-value">relative</span><span class="punctuation">;</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="adv-prop">color</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.card-link::after</span> <span class="punctuation">{</span>
+    <span class="property">content</span><span class="punctuation">:</span> <span class="css-value">''</span><span class="punctuation">;</span>
+    <span class="property">position</span><span class="punctuation">:</span> <span class="css-value">absolute</span><span class="punctuation">;</span>
+    <span class="property">bottom</span><span class="punctuation">:</span> <span class="css-number">-2</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">right</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">0</span><span class="punctuation">;</span>
+    <span class="property">height</span><span class="punctuation">:</span> <span class="css-number">2</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--primary</span>)<span class="punctuation">;</span>
+    <span class="adv-prop">transition</span><span class="punctuation">:</span> <span class="property">width</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.card-link:hover</span> <span class="punctuation">{</span>
+    <span class="property">color</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">--primary-dark</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.card-link:hover::after</span> <span class="punctuation">{</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-number">100</span><span class="css-unit">%</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ========== Debugging Activity ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🐛</div>
+                <span>Debugging — اكتشف الأخطاء</span>
+            </h2>
+
+            <div class="debug-box">
+                <h3>🔍 نشاط: اكتشف الأخطاء في CSS ده</h3>
+                <p style="color: #5C2828;">الكود ده فيه <strong>5 أخطاء شائعة</strong> في Advanced CSS.</p>
+
+                <div class="code-wrapper">
+                    <div class="code-header">
+                        <span class="code-lang">CSS — كود فيه أخطاء ❌</span>
+                        <div class="code-dots"><span></span><span></span><span></span></div>
+                    </div>
+<pre><code><span class="selector">:root</span> <span class="punctuation">{</span>
+    <span class="var-name">primary-color</span><span class="punctuation">:</span> <span class="css-color-val">#7C3AED</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.box</span> <span class="punctuation">{</span>
+    <span class="property">background</span><span class="punctuation">:</span> <span class="css-value">var</span>(<span class="var-name">primary-color</span>)<span class="punctuation">;</span>
+    <span class="property">width</span><span class="punctuation">:</span> <span class="css-value">calc</span>(<span class="css-number">100</span><span class="css-unit">%</span>-<span class="css-number">50</span><span class="css-unit">px</span>)<span class="punctuation">;</span>
+    <span class="property">box-shadow</span><span class="punctuation">:</span> <span class="css-number">0</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">20</span><span class="css-unit">px</span><span class="punctuation">;</span>
+    <span class="property">transition</span><span class="punctuation">:</span> <span class="css-number">0.3</span><span class="css-unit">s</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.box:hover</span> <span class="punctuation">{</span>
+    <span class="property">transform</span><span class="punctuation">:</span> <span class="css-value">translate</span>(<span class="css-number">10</span>)<span class="punctuation">;</span>
+<span class="punctuation">}</span>
+
+<span class="selector">.badge:before</span> <span class="punctuation">{</span>
+    <span class="property">content</span><span class="punctuation">:</span> <span class="css-value">none</span><span class="punctuation">;</span>
+<span class="punctuation">}</span></code></pre>
+                </div>
+
+                <div class="debug-comparison">
+                    <div class="debug-wrong">
+                        <div class="debug-label">❌ الأخطاء</div>
+                        <pre><code style="font-size: 0.85rem;">1. -- ناقص قبل اسم المتغير
+2. -- ناقص في var()
+3. calc() مسافات ناقصة حول -
+4. box-shadow ناقص color
+5. transition ناقص property
+6. translate() ناقص وحدة
+7. :before لازم ::before
+8. content: none ❌ (لازم string)</code></pre>
+                    </div>
+                    <div class="debug-right">
+                        <div class="debug-label">✅ الكود الصحيح</div>
+                        <pre><code style="font-size: 0.85rem;"><span class="selector">:root</span> <span class="punctuation">{</span>
+  <span class="var-name">--primary-color</span>: <span class="css-color-val">#7C3AED</span>;
+<span class="punctuation">}</span>
+
+<span class="selector">.box</span> <span class="punctuation">{</span>
+  <span class="property">background</span>: <span class="css-value">var</span>(<span class="var-name">--primary-color</span>);
+  <span class="property">width</span>: <span class="css-value">calc</span>(<span class="css-number">100</span><span class="css-unit">%</span> - <span class="css-number">50</span><span class="css-unit">px</span>);
+  <span class="property">box-shadow</span>: <span class="css-number">0</span> <span class="css-number">10</span><span class="css-unit">px</span> <span class="css-number">20</span><span class="css-unit">px</span> 
+    <span class="css-value">rgba</span>(<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0</span>,<span class="css-number">0.2</span>);
+  <span class="property">transition</span>: <span class="css-value">all</span> <span class="css-number">0.3</span><span class="css-unit">s</span> <span class="css-value">ease</span>;
+<span class="punctuation">}</span>
+
+<span class="selector">.box:hover</span> <span class="punctuation">{</span>
+  <span class="property">transform</span>: <span class="css-value">translate</span>(<span class="css-number">10</span><span class="css-unit">px</span>);
+<span class="punctuation">}</span>
+
+<span class="selector">.badge::before</span> <span class="punctuation">{</span>
+  <span class="property">content</span>: <span class="css-value">'✓'</span>;
+<span class="punctuation">}</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== Mini Project ========== -->
+        <section>
+            <h2 class="section-title">
+                <div class="title-icon">🎨</div>
+                <span>مشروع المحاضرة: Animated Card Gallery</span>
+            </h2>
+
+            <div class="card">
+                <h3>📋 المطلوب</h3>
+                <p>ابني <strong>معرض بطاقات متحرك</strong> يجمع كل اللي اتعلمناه:</p>
+                <ul style="list-style: none; padding-right: 0; margin-top: 15px;">
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> CSS Variables للألوان والقيم</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Gradients في الخلفيات</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Box Shadows متعددة</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Transitions سلسة</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Transform effects (hover)</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Pseudo-elements (::before, ::after)</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Hover effects متقدمة</li>
+                    <li style="padding: 8px 0; padding-right: 25px; position: relative; color: var(--text-body);"><span style="position: absolute; right: 0; color: var(--success); font-weight: 900;">✓</span> Responsive Grid</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 فكرة المشروع</h4>
+                <p>اعمل صفحة "Services" أو "Portfolio" فيها 6 cards على الأقل. كل card فيها:</p>
+                <p>• أيقونة (emoji أو icon)</p>
+                <p>• عنوان</p>
+                <p>• وصف</p>
+                <p>• زر أو رابط</p>
+                <p>• تأثيرات hover مميزة (lift, shadow, gradient overlay, icon animation)</p>
+            </div>
+        </section>
+
+        <!-- ========== Summary ========== -->
+        <section>
+            <div class="summary-box">
+                <h3>📌 ملخص المحاضرة</h3>
+                <ul class="summary-list">
+                    <li>CSS Variables: --name: value; و var(--name) — لإعادة استخدام القيم</li>
+                    <li>:root = العنصر الأعلى — مكان مثالي للـ Variables</li>
+                    <li>calc() = حسابات رياضية في CSS (جمع، طرح، ضرب، قسمة)</li>
+                    <li>box-shadow: offset-x offset-y blur spread color</li>
+                    <li>text-shadow: offset-x offset-y blur color</li>
+                    <li>linear-gradient() = تدرج خطي (angle, colors)</li>
+                    <li>radial-gradient() = تدرج دائري (from center)</li>
+                    <li>transition: property duration timing-function delay</li>
+                    <li>Timing functions: ease, linear, ease-in, ease-out, ease-in-out</li>
+                    <li>transform: translate(), scale(), rotate(), skew()</li>
+                    <li>Transform مش بيأثر على Document Flow</li>
+                    <li>Pseudo-classes: :hover, :focus, :active, :nth-child()</li>
+                    <li>Pseudo-elements: ::before, ::after (لازم content)</li>
+                    <li>::selection, ::placeholder, ::first-letter</li>
+                    <li>دايماً استخدم transition مع transform للحركات السلسة</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========== Next Lecture ========== -->
+        <section>
+            <div class="next-box">
+                <h3>🎉 مبروك! خلصنا CSS كله!</h3>
+                <p>المحاضرة الجاية هنبدأ <strong>المشروع التطبيقي الشامل</strong> — هنطبق كل اللي اتعلمناه في HTML + CSS في مشروع حقيقي كامل.</p>
+                <span class="next-topic">المحاضرة القادمة: مشروع تطبيقي شامل</span>
+            </div>
+        </section>
+
+        <!-- ========== Quiz Section ========== -->
+        <section class="quiz-section">
+            <div class="quiz-header">
+                <div class="quiz-header-icon">❓</div>
+                <div>
+                    <h2>أسئلة اختيار من متعدد</h2>
+                    <p>10 أسئلة لاختبار فهمك لمحتوى المحاضرة</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 1</span>
+                <h4>ما هو الـ syntax الصحيح لتعريف CSS Variable؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> $primary-color: #7C3AED;</li>
+                    <li><span class="option-letter">ب</span> @primary-color: #7C3AED;</li>
+                    <li><span class="option-letter">ج</span> --primary-color: #7C3AED;</li>
+                    <li><span class="option-letter">د</span> var-primary-color: #7C3AED;</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 2</span>
+                <h4>إزاي تستخدم CSS Variable؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> color: $primary-color;</li>
+                    <li><span class="option-letter">ب</span> color: var(--primary-color);</li>
+                    <li><span class="option-letter">ج</span> color: @primary-color;</li>
+                    <li><span class="option-letter">د</span> color: --primary-color;</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 3</span>
+                <h4>ما هو الـ syntax الصحيح لـ calc()؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> width: calc(100%-20px);</li>
+                    <li><span class="option-letter">ب</span> width: calc(100% - 20px);</li>
+                    <li><span class="option-letter">ج</span> width: calculate(100% - 20px);</li>
+                    <li><span class="option-letter">د</span> width: math(100% - 20px);</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 4</span>
+                <h4>ما هو ترتيب box-shadow الصحيح؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> color, blur, offset-x, offset-y</li>
+                    <li><span class="option-letter">ب</span> offset-x, offset-y, blur, spread, color</li>
+                    <li><span class="option-letter">ج</span> blur, offset-x, offset-y, color</li>
+                    <li><span class="option-letter">د</span> offset-x, offset-y, color, blur</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 5</span>
+                <h4>ما هو الـ syntax الصحيح لـ linear-gradient؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> background: gradient(linear, red, blue);</li>
+                    <li><span class="option-letter">ب</span> background: linear-gradient(red, blue);</li>
+                    <li><span class="option-letter">ج</span> background: linear(red to blue);</li>
+                    <li><span class="option-letter">د</span> background: gradient-linear(red, blue);</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 6</span>
+                <h4>ما هي الخاصية اللي بتخلي الحركة سلسة؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> animation</li>
+                    <li><span class="option-letter">ب</span> transition</li>
+                    <li><span class="option-letter">ج</span> transform</li>
+                    <li><span class="option-letter">د</span> motion</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 7</span>
+                <h4>ما هو value اللي بيحرك العنصر؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> transform: move(10px);</li>
+                    <li><span class="option-letter">ب</span> transform: translate(10px, 20px);</li>
+                    <li><span class="option-letter">ج</span> transform: position(10px);</li>
+                    <li><span class="option-letter">د</span> transform: shift(10px);</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 8</span>
+                <h4>ما هو pseudo-class اللي بيشتغل عند المرور بالماوس؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> :active</li>
+                    <li><span class="option-letter">ب</span> :focus</li>
+                    <li><span class="option-letter">ج</span> :hover</li>
+                    <li><span class="option-letter">د</span> :mouseover</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 9</span>
+                <h4>ما هو الـ syntax الصحيح لـ ::before؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> .element:before { content: 'text'; }</li>
+                    <li><span class="option-letter">ب</span> .element::before { content: 'text'; }</li>
+                    <li><span class="option-letter">ج</span> .element::before { text: 'text'; }</li>
+                    <li><span class="option-letter">د</span> .element:before { text: 'text'; }</li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <span class="question-number">سؤال 10</span>
+                <h4>ليه لازم نستخدم transition مع transform؟</h4>
+                <ul class="options">
+                    <li><span class="option-letter">أ</span> عشان transform مش بيشتغل من غير transition</li>
+                    <li><span class="option-letter">ب</span> عشان الحركة تبقى سلسة بدلاً من فورية</li>
+                    <li><span class="option-letter">ج</span> عشان transform يحتاج transition عشان يشتغل</li>
+                    <li><span class="option-letter">د</span> مش لازم — اختياري</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========== Homework Section ========== -->
+        <section class="homework-section">
+            <div class="homework-header">
+                <div class="homework-header-icon">📝</div>
+                <div>
+                    <h2>واجبات المحاضرة</h2>
+                    <p>5 مسائل تطبيقية متدرجة لتثبيت ما تعلمته</p>
+                </div>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الأول: CSS Variables</h4>
+                <p>ابني صفحة فيها:</p>
+                <ul>
+                    <li>:root فيه 5 variables على الأقل (colors, spacing, radius)</li>
+                    <li>3 cards يستخدموا الـ variables</li>
+                    <li>غير قيمة variable واحدة وشوف التغيير في كل الكاردز</li>
+                    <li>اعمل Dark Mode بسيط بـ media query</li>
+                </ul>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الثاني: Shadows & Gradients</h4>
+                <p>ابني صفحة فيها:</p>
+                <ul>
+                    <li>5 boxes بـ box-shadow مختلفة (none, small, medium, large, colored)</li>
+                    <li>3 headings بـ text-shadow مختلفة</li>
+                    <li>4 divs بـ linear-gradient مختلفة (directions, colors)</li>
+                    <li>2 divs بـ radial-gradient</li>
+                    <li>Hero section بـ gradient background + text shadow</li>
+                </ul>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الثالث: Transitions & Transforms</h4>
+                <p>ابني صفحة فيها:</p>
+                <ul>
+                    <li>3 buttons بـ hover effects مختلفة (lift, scale, color change)</li>
+                    <li>4 boxes بـ transform مختلفة (translate, scale, rotate, skew)</li>
+                    <li>Card بـ transition على box-shadow + transform</li>
+                    <li>Image container بـ zoom effect على hover</li>
+                    <li>Link بـ underline animation على hover</li>
+                </ul>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الرابع: Pseudo-classes & Elements</h4>
+                <p>ابني صفحة فيها:</p>
+                <ul>
+                    <li>قائمة 10 عناصر — استخدم :nth-child(odd/even/3n)</li>
+                    <li>Form بـ :focus effects على كل inputs</li>
+                    <li>زر بـ :active effect</li>
+                    <li>Quote بـ ::before (علامة اقتباس كبيرة)</li>
+                    <li>Badge بـ ::after (علامة ✓)</li>
+                    <li>::selection مخصص (لون مختلف)</li>
+                    <li>::placeholder مخصص</li>
+                </ul>
+            </div>
+
+            <div class="homework-item">
+                <h4>📌 الواجب الخامس: التحدي — Animated Services Page</h4>
+                <p>ابني صفحة "خدمات" كاملة تجمع كل اللي اتعلمته:</p>
+                <ul>
+                    <li>CSS Variables لكل الألوان والقيم</li>
+                    <li>Hero section بـ gradient background + text shadow</li>
+                    <li>6 service cards في Grid responsive</li>
+                    <li>كل card فيها:
+                        <ul>
+                            <li>أيقونة (emoji) بـ transform على hover</li>
+                            <li>عنوان + وصف</li>
+                            <li>زر بـ transition + hover effect</li>
+                            <li>box-shadow متغير على hover</li>
+                            <li>::before gradient overlay على hover</li>
+                        </ul>
+                    </li>
+                    <li>Testimonials section بـ ::before quotes</li>
+                    <li>CTA section بـ gradient + button</li>
+                    <li>Footer بسيط</li>
+                    <li>استخدم :nth-child للـ testimonials</li>
+                    <li>Responsive على كل الشاشات</li>
+                    <li>نظم الملفات: index.html + css/style.css + images/</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">S</div>
+                <span>Sunshine T Academy</span>
+            </div>
+            <p>Frontend Level 1 — HTML + CSS</p>
+            <p>بنحوّل الحلم لكود ☀️</p>
+            <p class="motto">CSS Variables • Shadows • Gradients • Transitions • Transforms</p>
+        </div>
+    </footer>
+
+</body>
+</html>
